@@ -1,0 +1,56 @@
+CREATE TABLE `books` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(1024) NOT NULL,
+  `releaseAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+
+
+CREATE TABLE `authors` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(1024) NOT NULL,
+  `surname` VARCHAR(1024) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+
+CREATE TABLE `clients` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `photoUrl` VARCHAR(2048) NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  `hashedPassword` VARCHAR(50) NOT NULL,
+  `salt` VARCHAR(50) NOT NULL,
+  `isAdmin` TINYINT NOT NULL,
+  `booksTakenCount` INT(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
+
+CREATE TABLE `authors_to_books` (
+  `id` INT NOT NULL,
+  `author_id` INT NULL,
+  `book_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `author_id_idx` (`author_id` ASC) VISIBLE,
+  INDEX `book_id_idx` (`book_id` ASC) VISIBLE,
+  CONSTRAINT `author_id`
+    FOREIGN KEY (`author_id`)
+    REFERENCES `authors` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `book_id`
+    FOREIGN KEY (`book_id`)
+    REFERENCES `books` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+ALTER TABLE `books`
+    ADD COLUMN `client_id` INT NULL AFTER `releaseAt`;
+    ALTER TABLE `books`
+    ADD CONSTRAINT `client_id`
+      FOREIGN KEY (`id`)
+      REFERENCES `clients` (`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION;
+

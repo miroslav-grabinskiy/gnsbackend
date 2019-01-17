@@ -1,0 +1,9 @@
+.cache/
+.idea/
+log/*
+node_modules/
+config/config.local.json
+npm-debug.log
+.vscode/*
+.editorconfig
+.nyc_output/

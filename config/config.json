@@ -1,0 +1,19 @@
+{
+  "port": 3333,
+  "host": "localhost",
+  "mysql": {
+    "host": "localhost",
+    "user": "root",
+    "password": "password",
+    "database": "library",
+    "connectionLimit": 10
+  },
+  "publicRoot": "/c/Users/User/WebstormProjects/GnsCli/gnscli/dist",
+  "session": {
+    "secret": "sessSecret"
+  },
+  "jwt": {
+    "secret": "myMegaJWTSecret"
+  },
+  "apiVersion": "/api/v1"
+}

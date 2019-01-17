@@ -1,0 +1,13 @@
+const path = require("path");
+const config = require("./config/config.json");
+
+const mysql = config.mysql;
+
+let url = `mysql://${mysql.user}:${mysql.password}@${mysql.host}/${mysql.database}`;
+
+var settings = {
+  "migrations-path": path.resolve("migrations/mysql"),
+  "url": url
+};
+
+module.exports = settings;
